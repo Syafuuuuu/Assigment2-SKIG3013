@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash, send_file
+from flask import Flask, request, redirect, url_for, flash, send_file
 from flask.templating import render_template
 from sqlite3 import Error
 import sqlite3
