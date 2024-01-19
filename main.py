@@ -9,7 +9,7 @@ app.secret_key = 'your_secret_key'  # for flashing messages
 def create_connection():
     conn = None
     try:
-        conn = sqlite3.connect('static/db/sent-contact.db')  # create a database connection
+        conn = sqlite3.connect('/home/syafuuuuu/Assigment2-SKIG3013/static/db/sent-contact.db')  # create a database connection
         return conn
     except Error as e:
         print(e)
@@ -30,7 +30,7 @@ def create_connection():
 #     message TEXT
 #     );
 #     '''
-    
+
 #     # Execute the table creation query
 #     cur.execute(table_creation_query)
 
@@ -51,7 +51,7 @@ subject TEXT,
 message TEXT
 );
 '''
-    
+
 # Execute the table creation query
 cur.execute(table_creation_query)
 
@@ -61,18 +61,18 @@ conn.close()
 
 @app.route('/form_route', methods=['GET', 'POST'])
 def form_route():
-    
+
     print("masuk route utk database")
-    
+
     if request.method == 'POST':
-        
+
         print("Masuk post")
-        
+
         name = request.form.get("name")
         email = request.form.get("email")
         subject = request.form.get("subject")
         message = request.form.get("message")
-        
+
         print("Get forms")
         print(name)
         print(email)
@@ -81,14 +81,14 @@ def form_route():
 
         conn = create_connection()
         cur = conn.cursor()
-        
+
         print("cursor connected")
-        
+
         cur.execute("INSERT INTO contacts (name, email, subject, message) VALUES (?, ?, ?, ?)", (name, email, subject, message))
         conn.commit()
-        
+
         print("database sent")
-        
+
         #return render_template("Landing_Page.html")
 
         return redirect(request.referrer)  # redirect to the same page
